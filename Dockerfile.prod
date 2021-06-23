@@ -1,0 +1,27 @@
+FROM node:16.3-alpine
+
+ENV HOME=/home
+ENV NODE_ENV=production
+ENV PORT=8080
+ENV TZ=Asia/Kuala_Lumpur
+
+RUN apk --no-cache update \
+  && apk --no-cache upgrade \
+  && apk add --no-cache curl py-pip tzdata
+
+EXPOSE $PORT
+
+WORKDIR $HOME/api
+
+COPY package*.json ./
+
+RUN npm ci --production \
+  && npm cache clean --force
+
+COPY . .
+
+RUN adduser -S node-app
+RUN chown -R node-app $HOME/api
+USER node-app
+
+CMD npm run start:prod

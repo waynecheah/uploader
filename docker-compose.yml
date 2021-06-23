@@ -1,0 +1,22 @@
+version: '2.3'
+
+services:
+  fastify-uploader:
+    build: .
+    command: ["npm", "run", "start:dev"]
+    container_name: fastify-uploader
+    restart: always
+    env_file: .env
+    image: uploader:1.0.1
+    networks:
+      - backend
+    ports:
+      - "3000:3000"
+    volumes:
+      - type: bind
+        source: .
+        target: /home/api
+
+networks:
+  backend:
+    name: private_net

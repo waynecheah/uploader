@@ -1,0 +1,71 @@
+{
+  "name": "uploader",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node --es-module-specifier-resolution=node index.js",
+    "start:dev": "nodemon --es-module-specifier-resolution=node",
+    "start:debug": "nodemon --es-module-specifier-resolution=node --inspect",
+    "start:prod": "node --es-module-specifier-resolution=node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@google-cloud/storage": "^5.8.5",
+    "fastify": "^3.18.0",
+    "fastify-multipart": "^4.0.6",
+    "fastify-static": "^4.2.2",
+    "file-type": "^16.5.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.29.0"
+  },
+  "eslintConfig": {
+    "rules": {
+      "indent": [
+        "error",
+        2
+      ],
+      "no-multiple-empty-lines": 2,
+      "parser": "babel-eslint"
+    }
+  },
+  "nodemonConfig": {
+    "restartable": "rs",
+    "ignore": [
+      "node_modules/**/node_modules",
+      "public/*",
+      "public/**/*",
+      "test/*",
+      "*.test.js"
+    ],
+    "verbose": true,
+    "ext": "js,json",
+    "events": {
+      "start": "printf '\\033c >>> Restarting due to changes...\n'"
+    },
+    "delay": "100"
+  },
+  "prettier": {
+    "printWidth": 120,
+    "semi": false,
+    "singleQuote": true,
+    "tabWidth": 4,
+    "trailingComma": "none",
+    "arrowParens": "avoid",
+    "overrides": [
+      {
+        "files": [
+          "*.json",
+          "*.yml"
+        ],
+        "options": {
+          "tabWidth": 2
+        }
+      }
+    ]
+  }
+}
