@@ -1,5 +1,6 @@
 import crypto from 'crypto'
 import fastify from 'fastify' 
+import fastifyCors from 'fastify-cors'
 import fastifyMultipart from 'fastify-multipart'
 import fastifyStatic from 'fastify-static'
 import FileType from 'file-type'
@@ -153,6 +154,20 @@ const {
 const fileSize = parseInt(MAX_FILE_SIZE)
 const files    = parseInt(MAX_FILES)
 
+app.register(fastifyCors, {
+  origin: (origin, cb) => {
+    if (
+      /kokweng.net/.test(origin) ||
+      /localhost/.test(origin)
+    ) {
+      cb(null, true)
+      return
+    }
+
+    cb(new Error('Not allowed'))
+  },
+  credentials: true
+})
 app.register(fastifyMultipart, {
   attachFieldsToBody: true,
   limits: {
