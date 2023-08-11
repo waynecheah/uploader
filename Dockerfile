@@ -1,4 +1,4 @@
-FROM node:16.3-alpine
+FROM node:16.20.2-alpine
 
 ENV HOME=/home
 ENV TS_NODE_TRANSPILE_ONLY=1
