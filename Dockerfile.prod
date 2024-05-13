@@ -1,4 +1,4 @@
-FROM node:16.3-alpine
+FROM node:16.19.1-alpine
 
 ENV HOME=/home
 ENV NODE_ENV=production
